@@ -1,0 +1,140 @@
+/*
+ * vader.css
+ * This CSS is the standard Vader styling.
+ */
+
+@CHARSET "ISO-8859-1";
+
+body {
+	background-image: url(http://vdsltechsupp.uswc.uswest.com/Graphics/appbackgrnd.jpg);
+	background-attachment: fixed;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+.headerBlack { color: #000000; }
+.userAlert { color: #FF0000; font-weight: bold; }	/* Same as style1 */
+.userWarn { color: #996600; }
+.userSelectInstruction { color: #003399; font-size: large; font-weight: bold; }
+.pageFunctionTitle { margin:auto; width:50%; background-color:#C2A385; text-align: center; font-size: large; font-weight: bold; }
+.headerName { font-size: 1.25em; }
+.headerValue { color: #936; font-size: 1.25em; font-style: normal; font-variant: small-caps; }
+.parameterName { color: #000066; }	/* Same as style15 */
+.parameterValue { color: #990000; font-weight: bold; }	/* Same as style12 of admin.php */
+.parameterSpecialName { font-size: small; font-weight: bold; }	/* Same as style18 */
+.fieldName { color: #000066; font-weight: bold; }	/* Same as style15 but now bold */
+.fieldValue { color: #003399; }	/* Same as style11 */
+.fontBold { font-weight: bold; }
+.mediumLowlight { font-size: medium; }
+.minorLowlight { font-size: small; }	/* Same as style19 */
+.minorHighlight { font-size: small; font-weight: bold; }
+.inactiveTitleText { color: #000066; font-weight: bold; }
+.buttonRadioText { color: #0000FF; font-weight: bold; }
+.buttonRadioTextForTable { color: #000000; font-weight: bold; }
+.whiteTitleText { color: #FFFFFF; font-weight: bold; }
+.always_blue { color: #0000CC; }
+.tableCellHeader { font-size: small; font-weight: bold; }
+.tableCellForButtonGray { background-color: #C4B7AC; }
+.tableCellForButtonTeal { background-color: #009966; }
+.tableCellForButtonTan { background-color: #CC9933; }
+.tableCellForButtonViolet { background-color: #9966FF; }
+.tableCellForButtonYellow { background-color: #FFFF66; }
+
+p.pageNavigationMenu { width:540px; background-color:#C0F2C0; text-align: left; }	/* Width displayed almost matches <li> styling */
+ul.navigationMenuLink { width:30%; background-color:#b0e0e6; }						/* Not really used? */
+li.navigationMenuLink { width:500px; background-color:#C0F2C0; }					/* Width displayed almost matches <p> styling */
+a.navigationMenuLink { width:inherit; background-color:#b0e0e6; text-align: center; }	/* Not really used? */
+
+#oltShelfContainer {
+	font-family: Impact, Charcoal, sans-serif;
+	background-color: #ADC2EB;
+	display: inline-block;	/* Size box container to shrink-wrap to fit contents */
+	padding: 7px;
+	margin: 10px;
+}
+#oltCardContainer {
+	background-color: #7094DB;
+	padding: 7px;
+	margin: 15px;
+}
+#oltPortContainer {
+	background-color: #3366CC;
+	padding: 5px;
+	margin: 3px;
+}
+
+table.keysValues {
+	text-align: center;
+	font-family: "Lucida Console", Monaco, monospace;
+	font-weight: normal;
+	background-color: #666;
+	border: 0px;
+	border-collapse: collapse;
+	border-spacing: 0px;
+}
+table.keysValues td {
+	background-color: #CCC;
+	color: #000;
+	padding: 3px 15px 3px 5px;
+	text-align: left;
+	border: 1px #fff solid;
+}
+table.keysValues td.header {
+	background-color: #666;
+	color: #fff;
+	padding: 4px;
+	text-align: center;
+	border-bottom: 2px #fff solid;
+	font-size: 110%;
+	font-weight: bold;
+}
+
+table.box-table-a
+{
+	font-family: "Courier New", Courier, monospace;
+	/* font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif; */
+	font-size: 12px;
+	margin: 45px;
+	/* width: 480px; */
+	text-align: left;
+	border-collapse: collapse;
+}
+table.box-table-a th
+{
+	font-size: 13px;
+	font-weight: normal;
+	padding: 8px;
+	background: #b9c9fe;
+	border-top: 4px solid #aabcfe;
+	border-bottom: 1px solid #fff;
+	color: #039;
+}
+table.box-table-a td
+{
+	padding: 8px;
+	background: #e8edff; 
+	border-bottom: 1px solid #fff;
+	color: #669;
+	border-top: 1px solid transparent;
+}
+table.box-table-a tr:hover td
+{
+	background: #d0dafd;
+	color: #339;
+}
+
+	/* The following .styleN selectors should (eventually) be obsolete; they were defined per (HTML/PHP) file and inconsistent */
+.style1 { color: #FF0000; font-weight: bold; }
+.style2 { color: #FFFFFF; font-weight: bold; }
+.style4 { color: #0000FF; }
+.style8 { color: #FF0000; }
+.style9 { color: #333333; }
+.style10 { color: #666666; }
+.style11 { color: #003399; }
+.style12 { color: #003399; font-size: large; font-weight: bold; }
+.style13 { color: #000000; }
+.style14 { color: #990000; }
+.style15 { color: #000066; }
+.style16 { color: #000066; font-weight: bold; }
+.style17 { color: #000000; }
+.style18 { font-size: small; font-weight: bold; }
+.style19 { font-size: small; }

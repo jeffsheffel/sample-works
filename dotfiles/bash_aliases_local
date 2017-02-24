@@ -1,0 +1,57 @@
+#
+# .bash_aliases_local - for BHC bhdcapwsd01:/home/jsheffel
+
+echo "Running .bash_aliases_local"
+
+export CGI=/var/www/dakossdev/cgi-bin
+export SVN_BRANCH=/home/jsheffel/code/repo/apps-perl/cgi-bin/branches/jsheffel-dev
+export DEPLOY=/opt/bhc/deploy/apps-perl/deployment
+
+export PERL5LIB=$SVN_BRANCH/lib:$SVN_BRANCH/cgi-bin/lib:/opt/bhc/perl/lib/perl5
+
+export PATH="/opt/bhc/bin/:$PATH"  # directory that devs can share programs
+export PATH="$SVN_BRANCH/opt/bin/:$PATH"  # add svn repo bin
+
+export LD_LIBRARY_PATH="/u01/app/oracle/product/11.1.0/client_1/lib"  # to run Perl DBD Oracle
+export ORACLE_HOME="/u01/app/oracle/product/11.1.0/client_1"          # to run Perl DBD Oracle
+
+alias cd.cgi='cd $CGI'
+alias pd.cgi='pushd $CGI'
+alias cdsb='cd $SVN_BRANCH'
+alias cd.sb='cd $SVN_BRANCH'
+alias pdsb='pushd $SVN_BRANCH'
+alias pd.sb='pushd $SVN_BRANCH'
+alias cd.d='cd $DEPLOY'
+alias pd.d='pushd $DEPLOY'
+
+alias cd.e='cd    $SVN_BRANCH/cgi-bin/bhp/ElectDc'
+alias pd.e='pushd $SVN_BRANCH/cgi-bin/bhp/ElectDc'
+alias cd.j='cd    $SVN_BRANCH/cgi-bin/bhp/wos'
+alias pd.j='pushd $SVN_BRANCH/cgi-bin/bhp/wos'
+alias cd.p='cd    $SVN_BRANCH/cgi-bin/bhp/PolesSw'
+alias pd.p='pushd $SVN_BRANCH/cgi-bin/bhp/PolesSw'
+alias cd.rc='cd    $SVN_BRANCH/cgi-bin/bhp/RefundContract'
+alias pd.rc='pushd $SVN_BRANCH/cgi-bin/bhp/RefundContract'
+alias cd.t='cd    $SVN_BRANCH/cgi-bin/bhp/Transformers'
+alias pd.t='pushd $SVN_BRANCH/cgi-bin/bhp/Transformers'
+alias cd.r='cd    $SVN_BRANCH/cgi-bin/bhe/Refrigerant'
+alias pd.r='pushd $SVN_BRANCH/cgi-bin/bhe/Refrigerant'
+
+alias cd.ew='cd    $SVN_BRANCH/www/bhp/ElectDc'
+alias pd.ew='pushd $SVN_BRANCH/www/bhp/ElectDc'
+alias cd.jw='cd    $SVN_BRANCH/www/bhp/wos'
+alias pd.jw='pushd $SVN_BRANCH/www/bhp/wos'
+alias cd.pw='cd    $SVN_BRANCH/www/bhp/PolesSw'
+alias pd.pw='pushd $SVN_BRANCH/www/bhp/PolesSw'
+alias cd.rcw='cd    $SVN_BRANCH/www/bhp/RefundContract'
+alias pd.rcw='pushd $SVN_BRANCH/www/bhp/RefundContract'
+alias cd.tw='cd    $SVN_BRANCH/www/bhp/Transformers'
+alias pd.tw='pushd $SVN_BRANCH/www/bhp/Transformers'
+alias cd.rw='cd    $SVN_BRANCH/www/bhe/Refrigerant'
+alias pd.rw='pushd $SVN_BRANCH/www/bhe/Refrigerant'
+
+alias cdto-related-app-files='cd    $(dir-related-app-files.sh)'
+alias pdto-related-app-files='pushd $(dir-related-app-files.sh)'
+
+alias tailssl='tail -f /var/log/httpd/ssl_access_log /var/log/httpd/ssl_error_log'
+

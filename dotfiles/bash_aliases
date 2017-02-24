@@ -1,0 +1,357 @@
+#!/bin/bash
+#
+# Note that the if-darwin and if-linux macros are missing; just ignore or add/fix it.
+#
+# MODIFICATIONS:
+# 160211 Sheffel Sanitize for BHC
+# 150521 Sheffel Add echo of running this script
+# 150303 Sheffel Add r.srsredis (for testing Production locally!); change remote MCP connection port (from 61952 to 5432)
+# 140730 Sheffel Add r.srsmcphome r.srsmcpdevhome r.srspsql r.srspsqldev
+
+echo "Running .bash_aliases"
+
+EDITOR="vim -p"
+DOT_FILES='.vimrc .bash_aliases'
+REMOTE_USER=jsheffel
+
+set -o vi
+
+# if-os checks
+for x in darwin linux cygwin bsd; do
+    alias if-$x-do="[ 1 == $(uname -a|grep -i $x|wc -l) ] &&"
+    alias ifnot-$x-do="[ 1 != $(uname -a|grep -i $x|wc -l) ] &&"
+    alias if-$x="if-$x-do echo"
+    alias ifnot-$x="if-$x-do echo"
+done
+
+alias l='ls -CF'
+alias ls="$(if-darwin ls -hG)$(if-linux ls -h --color=auto)"
+alias ll='ls -l'
+alias la='ls -a'
+alias lt='ls -t'
+alias llt='ls -lt'
+#alias tail="tail -f"
+alias p0='patch -p0 -i'
+alias rm~="find . -iname '*~' -exec rm {} \;"
+alias s.rm~="sudo find . -iname '*~' -exec rm {} \;"
+
+alias c="clear;clear"
+
+cdx() { cd $1/$2; }
+lth() { [ "$1" == "" ] && set -- "."; ls -lt $* | head -n 15; }
+
+DEVROOT="$(if-darwin /DevRoot)$(if-cygwin /DevRoot)$(ifnot-darwin-do ifnot-cygwin /usr/local/src)"
+WEBROOT="$(if-darwin /DevRoot)$(if-cygwin /DevRoot)$(ifnot-darwin-do ifnot-cygwin /var/www)"
+
+alias devroot="cdx $DEVROOT"
+alias webroot="cdx $WEBROOT"
+
+alias dr='devroot'
+alias wr='webroot'
+
+alias my="cdx $DEVROOT/$(if-darwin Self)"
+alias wk="cdx $DEVROOT/$(if-darwin Work)"
+alias wk-code="cdx $DEVROOT/$(if-darwin Work)/code"
+alias wk-keys="cdx $DEVROOT/$(if-darwin Work)/keys"
+alias wk-sites="cdx $DEVROOT/$(if-darwin Work)/sites"
+
+alias locate='if [ $((`date +%s`-`eval $(stat -s /var/db/locate.database); echo $st_mtime`)) -gt 3600 ]; then echo "locatedb is out-of-date!">/dev/stderr; sudo /usr/libexec/locate.updatedb>/dev/stderr; clear; echo "locatedb updated!">/dev/stderr; fi; locate -i'
+
+alias rgrep='grep -r'
+alias hgrep='history|grep'
+alias here='cd $PWD; pwd'
+
+swap_cmd() {
+    (set -f; $1 "${@:3}" $2)
+}
+
+# ff, gref & vimf permutations
+ff() {
+    [ $# -lt 1 ] && echo -e "Usage:\n\n\tff <file-patterns>\n" && return
+
+    echo "$(set -f; for x in $@; do
+        find $PWD -iname "$x"
+    done)"
+}
+
+gref() {
+    [ $# -lt 2 ] && echo -e "Usage:\n\n\tgref <grep-pattern> <file-patterns>\n" && return
+
+    grep -l "$1" $(set -f; ff ${@:1}) 2>/dev/null
+}
+
+vimf() {
+    [ $# -lt 2 ] && echo -e "Usage:\n\n\tvimf <grep-patern> <file-patterns>\n" && return
+
+    vim $(set -f; gref "$1" ${@:1})
+}
+
+s.vimf() {
+    [ $# -lt 2 ] && echo -e "Usage:\n\n\tvimf <grep-patern> <file-patterns>\n" && return
+
+    sudo vim $(set -f; gref "$1" ${@:1})
+}
+
+w.vimf() {
+    [ $# -lt 2 ] && echo -e "Usage:\n\n\tvimf <grep-patern> <file-patterns>\n" && return
+
+    wdo vim $(set -f; gref "$1" ${@:1})
+}
+
+# fix sudo and xargs to expand aliases
+for x in sudo xargs; do alias $x="$x "; done
+
+#www-data do
+alias wdo='sudo -u www-data'
+
+# always priveledged commands
+for x in $(if-linux apt-get add-apt-repository dpkg dpkg-reconfigure ufw) $(if-darwin port) su; do
+    alias $x="sudo $x"
+done
+
+#sudo & wdo commands
+for x in mv cp ls la ll ln vd vim mkdir rm ff cat tail zip unzip chmod chown chgrp; do
+    alias s.$x="sudo $x"
+    alias w.$x="wdo $x"
+done
+
+# tar permutations
+for x in xf xvf xzf xzvf xjf xjvf cf cvf czf czvf cjf cjvf; do
+    alias $x="tar $x"
+    alias s.$x="sudo tar $x"
+    alias w.$x="wdo tar $x"
+done
+
+for x in php js txt css html log json, rdmt; do
+    alias gref.$x="swap_cmd gref '*.$x'";
+    alias vimf.$x="swap_cmd vimf '*.$x'";
+done
+
+# vim shortcuts
+alias vim='vim -p'
+alias vimalias='vim ~/.bash_aliases && source ~/.bash_aliases'
+alias vimrc='vim ~/.vimrc'
+
+vimdo() {
+    [ $# -lt 1 ] && echo -e "Usage:\n\n\tvimdo <vim-command> <files>\n" && return
+
+    vim -e -c "set hidden" -c "bufdo $1" -c wqa ${@:1};
+}
+
+vimremember () {
+    [ -n "$1" ] && vimedit="$(ff $@)"
+    vim $vimedit
+}
+alias v='vimremember'
+
+svimremember () {
+    [ -n "$1" ] && vimedit="$(ff $@)"
+    sudo vim $vimedit
+}
+
+alias v='vimremember'
+alias s.v='svimremember'
+alias va='vimalias'
+alias vd='vimdiff'
+alias vdo='vimdo'
+alias vrc='vimrc'
+
+
+[ -O ~ ] && touch ~/.bash_args
+
+# Manage bash args for files
+bashargs () {
+    case $1 in
+        'add') [ -O ~ ] && echo -e "$2\t${@:3}" >> ~/.bash_args; source ~/.bash_aliases;;
+        'remove') [ -O ~ ] && sed -i.bak "/^$2[    ]/d" ~/.bash_args;;
+        'list') grep "$2" ~/.bash_args;;
+        'edit') [ -O ~ ] && $EDITOR ~/.bash_args;;
+        'get') grep "^$2\t" ~/.bash_args|cut -f2;;
+        *) [ -n "$1" ] && $1 $(bashargs get $1) ${@:2};;
+    esac;
+    [ -z "$1" ] && echo -e "Usage:\n\tbashargs [argument]\n\tbashargs add [argument]\n\tbashargs remove [argument]\n\tbashargs list [search]\n\tbashargs edit\n";
+}
+
+# Manage host files
+hosts () {
+    case $1 in
+        'add') [ -n "$3" ] && echo -e "$2\t$3" | sudo su root -c 'cat >> /etc/hosts'; hosts args $3 ${@:4}; grep -v ^# /etc/hosts; alias $3="ssh $3"; source ~/.bash_aliases;;
+        'remove') sudo sed -i.bak "/[[:<:]]$2[[:>:]]/d" /etc/hosts;sed -i.bak "/^$2:/d" ~/.hosts;sed -i.bak "/[[:<:]]$2[[:>:]]/d" ~/.ssh/known_hosts; grep -v ^# /etc/hosts;;
+        'list') grep -v ^# /etc/hosts | grep "$2";;
+        'do') $2 $(bashargs get $2) $(bashargs get $3:$2) $3 ${@:4};;
+        'args') [ -n "$3" ] && bashargs add $2:$3 ${@:4};;
+        'edit') sudo $EDITOR /etc/hosts;;
+        'listremote') grep remote_ /etc/hosts|cut -f2|sed 's/\#.*$//'|sort;;
+        #'listremote') grep -v "^#\|^127\.0\.0\.1\|localhost\|broadcasthost\|$(hostname)" /etc/hosts|cut -f2|sed 's/\#.*$//'|sort;;
+        'dotfiles_to') grep dotfiles_to /etc/hosts|awk '{print $2}'|sort;;
+        *) echo -e "Usage:\n\n\thosts add [ip] [hostname]\n\thosts remove [ip]\n\thosts list [search]\n\thosts edit\n\thosts do [command] [hostname] [arguments]\n\thosts args [hostname] [command] [arguments]\n\thosts dotfiles_to\t\t\t\t- input to dotfiles update\n";;
+    esac;
+}
+
+for x in $(cat ~/.bash_args|cut -f1|cut -d: -f2|sort|uniq); do
+    alias $x="hosts do $x"
+done
+
+# Rename host on linux
+if-linux-do hostrename () {
+    [ -n "$1" ] && (sudo sed -i.bak "s/[[:<:]]$(hostname)[[:>:]]/$1/g" /etc/hosts; sudo hostname $1; sudo su -c 'echo $(hostname) > /etc/hostname';) 2>/dev/null;
+    echo Hostname: $(hostname);
+}
+
+for x in $(hosts listremote); do
+    alias $x="ssh $x"
+done
+
+# Move dotfiles around
+dotfiles () {
+    cd ~;
+
+    case $1 in
+        'from') dotfiles archive; ssh $2 "tar czf - $DOT_FILES" > dot_files_$2.tgz; tar xzf dot_files_$2.tgz;;
+        'to') echo "Updating dot files ($DOT_FILES) on $2..."; tar czf - $DOT_FILES | ssh $2 "cat > dot_files.tgz; tar xzf dot_files.tgz" 2>&1 >/dev/null| grep "failed\|refused";;
+        'toall') for x in ${@:2};do dotfiles to $x;done;;
+        'update') dotfiles toall $(hosts dotfiles_to);;
+        #'update') dotfiles toall $(hosts listremote);;
+        'archive') tar czf dot_files.tgz $DOT_FILES;;
+        'restore') tar xzf dot_files.tgz;;
+        'edit') $EDITOR $DOT_FILES;;
+        *) echo -e "Usage:\n\n\tdotfiles from [hostname]\n\tdotfiles to [hostname]\n\tdotfiles toall [hostnames]\n\tdotfiles update\n\tdotfiles archive\n\tdotfiles restore\n\tdotfiles edit\n";;
+    esac;
+
+    source ~/.bash_aliases
+}
+
+# MacOS Daemons
+if-darwin-do for x in $(ls /Library/LaunchDaemons/*.plist 2>/dev/null); do
+    dname=${x%.plist}
+    dname=${dname##*[.]}
+    alias d.$dname-start="sudo launchctl load -w $x"
+    alias d.$dname-stop="sudo launchctl unload -w $x"
+    alias d.$dname-restart="d.$dname-stop; d.$dname-start"
+done
+
+# Linux Daemons
+if-linux-do for x in $(ls /etc/init.d/* 2>/dev/null | grep 'README\|\.'); do
+    dname=${x##*[.]d/}
+    alias d.$dname-start="sudo $x start"
+    alias d.$dname-stop="sudo $x stop"
+    alias d.$dname-restart="sudo $x restart"
+done
+
+# MacOS Users
+if-darwin-do for x in $(dscl . list /users|grep -v [_-]|grep -v $(whoami)); do
+    alias u.$x="HOME=~$x sudo -u $x bash --rcfile ~$(whoami)/.bash_aliases"
+done
+
+# Linux Users
+if-linux-do for x in $(cat /etc/passwd|cut -d: -f1|grep -v $(whoami)); do
+    alias u.$x="HOME=~$x sudo -u $x bash --rcfile ~$(whoami)/.bash_aliases"
+done
+
+u.create.sys-user () {
+    [ $# -lt 1 ] && echo -e "Usage:\n\n\tu.create.sys-user <username> <groups>\n" && return
+
+    NEWUSER="$1"
+
+    [ -z "$(cut -d':' -f1 /etc/passwd|grep $NEWUSER)" ] && sudo adduser --disabled-password --system --group --gecos "" $NEWUSER
+
+    sudo su $NEWUSER -c 'chmod 700 ~/'
+
+    for GROUP in ${@:1}; do
+        [ -z "$(cut -d':' -f1 /etc/group|grep $GROUP)" ] && sudo addgroup $GROUP
+        [ -z "$(groups $NEWUSER|grep $GROUP)" ] && sudo addgroup $NEWUSER $GROUP
+    done
+
+    echo $NEWUSER:$(< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c32) | sudo chpasswd
+}
+
+u.create.ssh-user () {
+    [ $# -lt 1 ] && echo -e "Usage:\n\n\tu.create.ssh-user <rsa-key-file> <groups>\n" && return
+
+    KEYFILE="$(cat $1)"
+    NEWUSER="$(echo "$KEYFILE" | cut -d' ' -f3 | cut -d@ -f1)"
+
+    [ -z "$(cut -d':' -f1 /etc/passwd|grep $NEWUSER)" ] && sudo adduser --disabled-password --gecos "" $NEWUSER
+
+    sudo su $NEWUSER -c 'chmod 755 ~/'  # mode=700 can cause user ssh logins to fail
+
+    USERDIR="$(cat /etc/passwd|grep ^$NEWUSER|cut -d: -f6)"
+
+    for GROUP in ${@:2}; do
+        [ -z "$(cut -d':' -f1 /etc/group|grep $GROUP)" ] && sudo addgroup $GROUP
+        [ -z "$(groups $NEWUSER|grep $GROUP)" ] && sudo addgroup $NEWUSER $GROUP
+    done
+
+    sudo [ ! -d $USERDIR/.ssh ] && sudo mkdir -m700 $USERDIR/.ssh
+    sudo echo "$KEYFILE" | sudo tee $USERDIR/.ssh/authorized_keys
+    sudo chmod 644 $USERDIR/.ssh/authorized_keys
+    sudo chown -R $NEWUSER: $USERDIR/.ssh
+
+    echo $NEWUSER:temp123 | sudo chpasswd
+}
+
+u.create.ssh-keyauth () {
+    [ $# -lt 2 ] && echo -e "Usage:\n\n\tu.create.ssh-keyauth <username> <remote-ip>\n" && return
+
+    NEWUSER="$1"
+    USERDIR="$(cat /etc/passwd|grep ^$NEWUSER|cut -d: -f6)"
+
+    ssh-keygen -N "" -b 4096 -t rsa -f $NEWUSER
+
+    EXTRA="permitopen="'"127.0.0.1:61952"'",from="'"'"$2"'"'",no-agent-forwarding,no-pty,no-user-rc,no-X11-forwarding"
+    KEYFILE="$(cat $NEWUSER.pub)"
+
+    sudo [ ! -d $USERDIR/.ssh ] && sudo mkdir -m700 $USERDIR/.ssh
+    echo "$EXTRA ${KEYFILE/$(whoami)@/$NEWUSER@}" | sudo tee $USERDIR/.ssh/authorized_keys
+    sudo chmod 644 $USERDIR/.ssh/authorized_keys
+    sudo chown -R $NEWUSER: $USERDIR/.ssh
+
+    mv $NEWUSER $NEWUSER.key
+
+    echo -e "\nPlace $NEWUSER.key in remote user's ~/.ssh/id_rsa\n"
+}
+
+# Log Tails
+for x in $(find /var/log -iname *.log 2>/dev/null); do
+    lname=$(echo ${x:9} | tr / -)
+    lname=${lname%.log}
+    alias l.$lname="s.tail $x"
+done
+
+alias l.clean='s.rm $(sudo find /var/log/ -iname *.1) $(sudo find /var/log/ -iname *.gz)'
+
+#tmux
+alias zz="tmux new-session -s"
+alias za="tmux attach -t"
+alias zq="tmux detach"
+alias zx="tmux kill-session"
+alias zc="tmux list-commands"
+alias zl="tmux list-sessions"
+alias zm="tmux set mouse"
+alias zv="tmux split -h"
+alias zh="tmux split -v"
+
+#frinknet tools
+alias tiktv="vim    ~/bin/tikt"
+
+#srstools remote
+if-darwin-do alias gd="cd ~/Google\ Drive/"
+
+
+if-darwin-do alias r.srspsql="psql -h 127.0.0.1 -p 5432 -U $REMOTE_USER mcp_prd"
+if-darwin-do alias r.srspsqldev="psql -h 127.0.0.1 -p 5432 -U $REMOTE_USER mcp_dev"
+
+# Redis control - local
+#if-darwin-do alias redisstart="sudo launchctl start org.macports.redis" # but daemondo auto restarts daemon
+if-darwin-do alias redisstart="sudo launchctl load /Library/LaunchDaemons/org.macports.redis.plist"
+if-darwin-do alias redisstop="sudo launchctl unload /Library/LaunchDaemons/org.macports.redis.plist"
+
+alias ppxml='python -c "import sys, xml.dom.minidom; print xml.dom.minidom.parseString(sys.stdin.read()).toprettyxml()"'
+
+export GPG_TTY=`tty`
+alias gwf=~/bin/grep-work-files.sh     # Sheffel command to grep his work files (duh)
+
+if [ -f ~/.bash_aliases_local ]; then
+    . ~/.bash_aliases_local
+fi
+

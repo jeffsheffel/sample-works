@@ -1,0 +1,30 @@
+@CHARSET "ISO-8859-1";
+
+.ontStatus {
+	font-family: Impact, Charcoal, sans-serif;
+	background-color: #6C6C6C;
+	display: inline-block;	/* Size box container to shrink-wrap to fit contents */
+	width: 800px;
+	padding: 7px;
+	margin: 10px;
+}
+
+.ontStatus div {
+	background-color: #85D6FF;
+	padding: 7px;
+	margin: 15px;
+}
+
+.ontStatus li.parameter {
+	width:50%;
+	float:left;
+	background-color: #D8D8D8;
+	border: 1px solid #336680;
+}
+
+.ontStatus li.value {
+	width:48%;
+	float:right;
+	background-color: #D8D8D8;
+	border: 1px solid #336680;
+}

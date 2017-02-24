@@ -1,0 +1,626 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<xsd:schema xmlns:xsd = "http://www.w3.org/2001/XMLSchema"
+	xmlns="http://vdsltechsupp.uswc.uswest.com/vader/include/xsd/calix/766GX-R.xsd"
+	elementFormDefault = "qualified">
+	<xsd:element name = "RESULT">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name = "TRANSNUM" type = "xsd:string"/>
+				<xsd:element name = "DATETIME" type = "xsd:string"/>
+				<xsd:element name = "REQUEST" type = "xsd:string"/>
+				<xsd:element name = "NETWORK-LOCATION">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name = "VENDOR" type = "xsd:string"/>
+							<xsd:element name = "CHASSIS-TID" type = "xsd:string"/>
+							<xsd:element name = "ONT-AID" type = "xsd:string"/>
+							<xsd:element name = "PRODUCT-ID" type = "xsd:string"/>
+							<xsd:element name = "OLT-LOCATION" type = "xsd:string"/>
+							<xsd:element name = "OLT-UPTIME" type = "xsd:string"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name = "LINECARD-PORT-STAT">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name = "CARD-TYPE" type = "xsd:string"/>
+							<xsd:element name = "CARD-CLEI-CODE" type = "xsd:string"/>
+							<xsd:element name = "CARD-PART-NO" type = "xsd:string"/>
+							<xsd:element name = "CARD-SERIAL-NO" type = "xsd:string"/>
+							<xsd:element name = "CARD-REVISION" type = "xsd:string"/>
+							<xsd:element name = "CARD-SOFTWARE-VERSION-ALTERNATE" type = "xsd:string"/>
+							<xsd:element name = "CARD-SOFTWARE-VERSION" type = "xsd:string"/>
+							<xsd:element name = "CARD-OPERATIONAL-STATE" type = "xsd:string"/>
+							<xsd:element name = "CARD-UPTIME" type = "xsd:string"/>
+							<xsd:element name = "PONPORT-SERVICE-STATE" type = "xsd:string"/>
+							<xsd:element name = "PONPORT-DEPLOYMENT-RANGE" type = "xsd:string"/>
+							<xsd:element name = "PONPORT-SFP-STATE" type = "xsd:string"/>
+							<xsd:element name = "PONPORT-SFP-ADDL-INFO" type = "xsd:string"/>
+							<xsd:element name = "PONPORT-SFP-TX-PWR" type = "xsd:string"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name = "ONT-STAT">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name = "ONT-SERIAL-NO" type = "xsd:string"/>
+							<xsd:element name = "ONT-SUBSCRIBER-ID" type = "xsd:string"/>
+							<xsd:element name = "ONT-DESCRIPTION" type = "xsd:string"/>
+							<xsd:element name = "ONT-CLEI-CODE" type = "xsd:string"/>
+							<xsd:element name = "ONT-HW-VERSION-NO" type = "xsd:string"/>
+							<xsd:element name = "ONT-PART-NO" type = "xsd:string"/>
+							<xsd:element name = "ONT-SW-VERSION-ALTERNATE" type = "xsd:string"/>
+							<xsd:element name = "ONT-SW-VERSION-ACTIVE" type = "xsd:string"/>
+							<xsd:element name = "ONT-ADMIN-STATE" type = "xsd:string"/>
+							<xsd:element name = "ONT-OPERATIONAL-STATE" type = "xsd:string"/>
+							<xsd:element name = "ONT-UPTIME" type = "xsd:string"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name = "ONTPOTS-PORT-STAT">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name = "POTS-PORT-1">
+								<xsd:sequence>
+									<xsd:element name = "PROVISIONED-STATE" type = "xsd:string"/>
+									<xsd:element name = "SUBSCRIBER-ID" type = "xsd:string"/>
+									<xsd:element name = "DESCRIPTION" type = "xsd:string"/>
+									<xsd:element name = "PORT-TYPE" type = "xsd:string"/>
+									<xsd:element name = "PROFILE-NAME" type = "xsd:string"/>
+									<xsd:element name = "CRV" type = "xsd:string"/>
+									<xsd:element name = "SERVICE-STATE" type = "xsd:string"/>
+									<xsd:element name = "OPERATIONAL-STATE" type = "xsd:string"/>
+									<xsd:element name = "ADDITIONAL-STATE" type = "xsd:string"/>
+									<xsd:element name = "HOOK-STATE" type = "xsd:string"/>
+									<xsd:element name = "CONFIGURATION-STATUS" type = "xsd:string"/>
+									<xsd:element name = "SERVICE-STATUS" type = "xsd:string"/>
+									<xsd:element name = "CALL-STATUS" type = "xsd:string"/>
+									<xsd:element name = "ACTUAL-PWR-STATUS" type = "xsd:string"/>
+								</xsd:sequence>
+							</xsd:element>
+							<xsd:element name = "POTS-PORT-2">
+								<xsd:sequence>
+									<xsd:element name = "PROVISIONED-STATE" type = "xsd:string"/>
+									<xsd:element name = "SUBSCRIBER-ID" type = "xsd:string"/>
+									<xsd:element name = "DESCRIPTION" type = "xsd:string"/>
+									<xsd:element name = "PORT-TYPE" type = "xsd:string"/>
+									<xsd:element name = "PROFILE-NAME" type = "xsd:string"/>
+									<xsd:element name = "CRV" type = "xsd:string"/>
+									<xsd:element name = "SERVICE-STATE" type = "xsd:string"/>
+									<xsd:element name = "OPERATIONAL-STATE" type = "xsd:string"/>
+									<xsd:element name = "ADDITIONAL-STATE" type = "xsd:string"/>
+									<xsd:element name = "HOOK-STATE" type = "xsd:string"/>
+									<xsd:element name = "CONFIGURATION-STATUS" type = "xsd:string"/>
+									<xsd:element name = "SERVICE-STATUS" type = "xsd:string"/>
+									<xsd:element name = "CALL-STATUS" type = "xsd:string"/>
+									<xsd:element name = "ACTUAL-PWR-STATUS" type = "xsd:string"/>
+								</xsd:sequence>
+							</xsd:element>
+							<xsd:element name = "POTS-PORT-3">
+								<xsd:sequence>
+									<xsd:element name = "PROVISIONED-STATE" type = "xsd:string"/>
+									<xsd:element name = "SUBSCRIBER-ID" type = "xsd:string"/>
+									<xsd:element name = "DESCRIPTION" type = "xsd:string"/>
+									<xsd:element name = "PORT-TYPE" type = "xsd:string"/>
+									<xsd:element name = "PROFILE-NAME" type = "xsd:string"/>
+									<xsd:element name = "CRV" type = "xsd:string"/>
+									<xsd:element name = "SERVICE-STATE" type = "xsd:string"/>
+									<xsd:element name = "OPERATIONAL-STATE" type = "xsd:string"/>
+									<xsd:element name = "ADDITIONAL-STATE" type = "xsd:string"/>
+									<xsd:element name = "HOOK-STATE" type = "xsd:string"/>
+									<xsd:element name = "CONFIGURATION-STATUS" type = "xsd:string"/>
+									<xsd:element name = "SERVICE-STATUS" type = "xsd:string"/>
+									<xsd:element name = "CALL-STATUS" type = "xsd:string"/>
+									<xsd:element name = "ACTUAL-PWR-STATUS" type = "xsd:string"/>
+								</xsd:sequence>
+							</xsd:element>
+							<xsd:element name = "POTS-PORT-4">
+								<xsd:sequence>
+									<xsd:element name = "PROVISIONED-STATE" type = "xsd:string"/>
+									<xsd:element name = "SUBSCRIBER-ID" type = "xsd:string"/>
+									<xsd:element name = "DESCRIPTION" type = "xsd:string"/>
+									<xsd:element name = "PORT-TYPE" type = "xsd:string"/>
+									<xsd:element name = "PROFILE-NAME" type = "xsd:string"/>
+									<xsd:element name = "CRV" type = "xsd:string"/>
+									<xsd:element name = "SERVICE-STATE" type = "xsd:string"/>
+									<xsd:element name = "OPERATIONAL-STATE" type = "xsd:string"/>
+									<xsd:element name = "ADDITIONAL-STATE" type = "xsd:string"/>
+									<xsd:element name = "HOOK-STATE" type = "xsd:string"/>
+									<xsd:element name = "CONFIGURATION-STATUS" type = "xsd:string"/>
+									<xsd:element name = "SERVICE-STATUS" type = "xsd:string"/>
+									<xsd:element name = "CALL-STATUS" type = "xsd:string"/>
+									<xsd:element name = "ACTUAL-PWR-STATUS" type = "xsd:string"/>
+								</xsd:sequence>
+							</xsd:element>
+							<xsd:element name = "POTS-PORT-5">
+								<xsd:sequence>
+									<xsd:element name = "PROVISIONED-STATE" type = "xsd:string"/>
+									<xsd:element name = "SUBSCRIBER-ID" type = "xsd:string"/>
+									<xsd:element name = "DESCRIPTION" type = "xsd:string"/>
+									<xsd:element name = "PORT-TYPE" type = "xsd:string"/>
+									<xsd:element name = "PROFILE-NAME" type = "xsd:string"/>
+									<xsd:element name = "CRV" type = "xsd:string"/>
+									<xsd:element name = "SERVICE-STATE" type = "xsd:string"/>
+									<xsd:element name = "OPERATIONAL-STATE" type = "xsd:string"/>
+									<xsd:element name = "ADDITIONAL-STATE" type = "xsd:string"/>
+									<xsd:element name = "HOOK-STATE" type = "xsd:string"/>
+									<xsd:element name = "CONFIGURATION-STATUS" type = "xsd:string"/>
+									<xsd:element name = "SERVICE-STATUS" type = "xsd:string"/>
+									<xsd:element name = "CALL-STATUS" type = "xsd:string"/>
+									<xsd:element name = "ACTUAL-PWR-STATUS" type = "xsd:string"/>
+								</xsd:sequence>
+							</xsd:element>
+							<xsd:element name = "POTS-PORT-6">
+								<xsd:sequence>
+									<xsd:element name = "PROVISIONED-STATE" type = "xsd:string"/>
+									<xsd:element name = "SUBSCRIBER-ID" type = "xsd:string"/>
+									<xsd:element name = "DESCRIPTION" type = "xsd:string"/>
+									<xsd:element name = "PORT-TYPE" type = "xsd:string"/>
+									<xsd:element name = "PROFILE-NAME" type = "xsd:string"/>
+									<xsd:element name = "CRV" type = "xsd:string"/>
+									<xsd:element name = "SERVICE-STATE" type = "xsd:string"/>
+									<xsd:element name = "OPERATIONAL-STATE" type = "xsd:string"/>
+									<xsd:element name = "ADDITIONAL-STATE" type = "xsd:string"/>
+									<xsd:element name = "HOOK-STATE" type = "xsd:string"/>
+									<xsd:element name = "CONFIGURATION-STATUS" type = "xsd:string"/>
+									<xsd:element name = "SERVICE-STATUS" type = "xsd:string"/>
+									<xsd:element name = "CALL-STATUS" type = "xsd:string"/>
+									<xsd:element name = "ACTUAL-PWR-STATUS" type = "xsd:string"/>
+								</xsd:sequence>
+							</xsd:element>
+							<xsd:element name = "POTS-PORT-7">
+								<xsd:sequence>
+									<xsd:element name = "PROVISIONED-STATE" type = "xsd:string"/>
+									<xsd:element name = "SUBSCRIBER-ID" type = "xsd:string"/>
+									<xsd:element name = "DESCRIPTION" type = "xsd:string"/>
+									<xsd:element name = "PORT-TYPE" type = "xsd:string"/>
+									<xsd:element name = "PROFILE-NAME" type = "xsd:string"/>
+									<xsd:element name = "CRV" type = "xsd:string"/>
+									<xsd:element name = "SERVICE-STATE" type = "xsd:string"/>
+									<xsd:element name = "OPERATIONAL-STATE" type = "xsd:string"/>
+									<xsd:element name = "ADDITIONAL-STATE" type = "xsd:string"/>
+									<xsd:element name = "HOOK-STATE" type = "xsd:string"/>
+									<xsd:element name = "CONFIGURATION-STATUS" type = "xsd:string"/>
+									<xsd:element name = "SERVICE-STATUS" type = "xsd:string"/>
+									<xsd:element name = "CALL-STATUS" type = "xsd:string"/>
+									<xsd:element name = "ACTUAL-PWR-STATUS" type = "xsd:string"/>
+								</xsd:sequence>
+							</xsd:element>
+							<xsd:element name = "POTS-PORT-8">
+								<xsd:sequence>
+									<xsd:element name = "PROVISIONED-STATE" type = "xsd:string"/>
+									<xsd:element name = "SUBSCRIBER-ID" type = "xsd:string"/>
+									<xsd:element name = "DESCRIPTION" type = "xsd:string"/>
+									<xsd:element name = "PORT-TYPE" type = "xsd:string"/>
+									<xsd:element name = "PROFILE-NAME" type = "xsd:string"/>
+									<xsd:element name = "CRV" type = "xsd:string"/>
+									<xsd:element name = "SERVICE-STATE" type = "xsd:string"/>
+									<xsd:element name = "OPERATIONAL-STATE" type = "xsd:string"/>
+									<xsd:element name = "ADDITIONAL-STATE" type = "xsd:string"/>
+									<xsd:element name = "HOOK-STATE" type = "xsd:string"/>
+									<xsd:element name = "CONFIGURATION-STATUS" type = "xsd:string"/>
+									<xsd:element name = "SERVICE-STATUS" type = "xsd:string"/>
+									<xsd:element name = "CALL-STATUS" type = "xsd:string"/>
+									<xsd:element name = "ACTUAL-PWR-STATUS" type = "xsd:string"/>
+								</xsd:sequence>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name = "T1E1-PORT-STAT">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name = "T1E1-PORT-1">
+								<xsd:sequence>
+									<xsd:element name = "PROVISIONED-STATE" type = "xsd:string"/>
+									<xsd:element name = "SUBSCRIBER-ID" type = "xsd:string"/>
+									<xsd:element name = "DESCRIPTION" type = "xsd:string"/>
+									<xsd:element name = "FRAMING" type = "xsd:string"/>
+									<xsd:element name = "LINE-CODE" type = "xsd:string"/>
+									<xsd:element name = "LINE-LENGTH" type = "xsd:string"/>
+									<xsd:element name = "TIMING-MODE" type = "xsd:string"/>
+									<xsd:element name = "LOOPBACK" type = "xsd:string"/>
+									<xsd:element name = "GOS-PROFILE" type = "xsd:string"/>
+									<xsd:element name = "LOOPBACK-ENABLE" type = "xsd:string"/>
+									<xsd:element name = "IMPEDANCE" type = "xsd:string"/>
+									<xsd:element name = "OPERATIONAL-STATE" type = "xsd:string"/>
+									<xsd:element name = "ADDITIONAL-STATE" type = "xsd:string"/>
+									<xsd:element name = "ACTUAL-PWR-STATUS" type = "xsd:string"/>
+								</xsd:sequence>
+							</xsd:element>
+							<xsd:element name = "T1E1-PORT-2">
+								<xsd:sequence>
+									<xsd:element name = "PROVISIONED-STATE" type = "xsd:string"/>
+									<xsd:element name = "SUBSCRIBER-ID" type = "xsd:string"/>
+									<xsd:element name = "DESCRIPTION" type = "xsd:string"/>
+									<xsd:element name = "FRAMING" type = "xsd:string"/>
+									<xsd:element name = "LINE-CODE" type = "xsd:string"/>
+									<xsd:element name = "LINE-LENGTH" type = "xsd:string"/>
+									<xsd:element name = "TIMING-MODE" type = "xsd:string"/>
+									<xsd:element name = "LOOPBACK" type = "xsd:string"/>
+									<xsd:element name = "GOS-PROFILE" type = "xsd:string"/>
+									<xsd:element name = "LOOPBACK-ENABLE" type = "xsd:string"/>
+									<xsd:element name = "IMPEDANCE" type = "xsd:string"/>
+									<xsd:element name = "OPERATIONAL-STATE" type = "xsd:string"/>
+									<xsd:element name = "ADDITIONAL-STATE" type = "xsd:string"/>
+									<xsd:element name = "ACTUAL-PWR-STATUS" type = "xsd:string"/>
+								</xsd:sequence>
+							</xsd:element>
+							<xsd:element name = "T1E1-PORT-3">
+								<xsd:sequence>
+									<xsd:element name = "PROVISIONED-STATE" type = "xsd:string"/>
+									<xsd:element name = "SUBSCRIBER-ID" type = "xsd:string"/>
+									<xsd:element name = "DESCRIPTION" type = "xsd:string"/>
+									<xsd:element name = "FRAMING" type = "xsd:string"/>
+									<xsd:element name = "LINE-CODE" type = "xsd:string"/>
+									<xsd:element name = "LINE-LENGTH" type = "xsd:string"/>
+									<xsd:element name = "TIMING-MODE" type = "xsd:string"/>
+									<xsd:element name = "LOOPBACK" type = "xsd:string"/>
+									<xsd:element name = "GOS-PROFILE" type = "xsd:string"/>
+									<xsd:element name = "LOOPBACK-ENABLE" type = "xsd:string"/>
+									<xsd:element name = "IMPEDANCE" type = "xsd:string"/>
+									<xsd:element name = "OPERATIONAL-STATE" type = "xsd:string"/>
+									<xsd:element name = "ADDITIONAL-STATE" type = "xsd:string"/>
+									<xsd:element name = "ACTUAL-PWR-STATUS" type = "xsd:string"/>
+								</xsd:sequence>
+							</xsd:element>
+							<xsd:element name = "T1E1-PORT-4">
+								<xsd:sequence>
+									<xsd:element name = "PROVISIONED-STATE" type = "xsd:string"/>
+									<xsd:element name = "SUBSCRIBER-ID" type = "xsd:string"/>
+									<xsd:element name = "DESCRIPTION" type = "xsd:string"/>
+									<xsd:element name = "FRAMING" type = "xsd:string"/>
+									<xsd:element name = "LINE-CODE" type = "xsd:string"/>
+									<xsd:element name = "LINE-LENGTH" type = "xsd:string"/>
+									<xsd:element name = "TIMING-MODE" type = "xsd:string"/>
+									<xsd:element name = "LOOPBACK" type = "xsd:string"/>
+									<xsd:element name = "GOS-PROFILE" type = "xsd:string"/>
+									<xsd:element name = "LOOPBACK-ENABLE" type = "xsd:string"/>
+									<xsd:element name = "IMPEDANCE" type = "xsd:string"/>
+									<xsd:element name = "OPERATIONAL-STATE" type = "xsd:string"/>
+									<xsd:element name = "ADDITIONAL-STATE" type = "xsd:string"/>
+									<xsd:element name = "ACTUAL-PWR-STATUS" type = "xsd:string"/>
+								</xsd:sequence>
+							</xsd:element>
+							<xsd:element name = "T1E1-PORT-5">
+								<xsd:sequence>
+									<xsd:element name = "PROVISIONED-STATE" type = "xsd:string"/>
+									<xsd:element name = "SUBSCRIBER-ID" type = "xsd:string"/>
+									<xsd:element name = "DESCRIPTION" type = "xsd:string"/>
+									<xsd:element name = "FRAMING" type = "xsd:string"/>
+									<xsd:element name = "LINE-CODE" type = "xsd:string"/>
+									<xsd:element name = "LINE-LENGTH" type = "xsd:string"/>
+									<xsd:element name = "TIMING-MODE" type = "xsd:string"/>
+									<xsd:element name = "LOOPBACK" type = "xsd:string"/>
+									<xsd:element name = "GOS-PROFILE" type = "xsd:string"/>
+									<xsd:element name = "LOOPBACK-ENABLE" type = "xsd:string"/>
+									<xsd:element name = "IMPEDANCE" type = "xsd:string"/>
+									<xsd:element name = "OPERATIONAL-STATE" type = "xsd:string"/>
+									<xsd:element name = "ADDITIONAL-STATE" type = "xsd:string"/>
+									<xsd:element name = "ACTUAL-PWR-STATUS" type = "xsd:string"/>
+								</xsd:sequence>
+							</xsd:element>
+							<xsd:element name = "T1E1-PORT-6">
+								<xsd:sequence>
+									<xsd:element name = "PROVISIONED-STATE" type = "xsd:string"/>
+									<xsd:element name = "SUBSCRIBER-ID" type = "xsd:string"/>
+									<xsd:element name = "DESCRIPTION" type = "xsd:string"/>
+									<xsd:element name = "FRAMING" type = "xsd:string"/>
+									<xsd:element name = "LINE-CODE" type = "xsd:string"/>
+									<xsd:element name = "LINE-LENGTH" type = "xsd:string"/>
+									<xsd:element name = "TIMING-MODE" type = "xsd:string"/>
+									<xsd:element name = "LOOPBACK" type = "xsd:string"/>
+									<xsd:element name = "GOS-PROFILE" type = "xsd:string"/>
+									<xsd:element name = "LOOPBACK-ENABLE" type = "xsd:string"/>
+									<xsd:element name = "IMPEDANCE" type = "xsd:string"/>
+									<xsd:element name = "OPERATIONAL-STATE" type = "xsd:string"/>
+									<xsd:element name = "ADDITIONAL-STATE" type = "xsd:string"/>
+									<xsd:element name = "ACTUAL-PWR-STATUS" type = "xsd:string"/>
+								</xsd:sequence>
+							</xsd:element>
+							<xsd:element name = "T1E1-PORT-7">
+								<xsd:sequence>
+									<xsd:element name = "PROVISIONED-STATE" type = "xsd:string"/>
+									<xsd:element name = "SUBSCRIBER-ID" type = "xsd:string"/>
+									<xsd:element name = "DESCRIPTION" type = "xsd:string"/>
+									<xsd:element name = "FRAMING" type = "xsd:string"/>
+									<xsd:element name = "LINE-CODE" type = "xsd:string"/>
+									<xsd:element name = "LINE-LENGTH" type = "xsd:string"/>
+									<xsd:element name = "TIMING-MODE" type = "xsd:string"/>
+									<xsd:element name = "LOOPBACK" type = "xsd:string"/>
+									<xsd:element name = "GOS-PROFILE" type = "xsd:string"/>
+									<xsd:element name = "LOOPBACK-ENABLE" type = "xsd:string"/>
+									<xsd:element name = "IMPEDANCE" type = "xsd:string"/>
+									<xsd:element name = "OPERATIONAL-STATE" type = "xsd:string"/>
+									<xsd:element name = "ADDITIONAL-STATE" type = "xsd:string"/>
+									<xsd:element name = "ACTUAL-PWR-STATUS" type = "xsd:string"/>
+								</xsd:sequence>
+							</xsd:element>
+							<xsd:element name = "T1E1-PORT-8">
+								<xsd:sequence>
+									<xsd:element name = "PROVISIONED-STATE" type = "xsd:string"/>
+									<xsd:element name = "SUBSCRIBER-ID" type = "xsd:string"/>
+									<xsd:element name = "DESCRIPTION" type = "xsd:string"/>
+									<xsd:element name = "FRAMING" type = "xsd:string"/>
+									<xsd:element name = "LINE-CODE" type = "xsd:string"/>
+									<xsd:element name = "LINE-LENGTH" type = "xsd:string"/>
+									<xsd:element name = "TIMING-MODE" type = "xsd:string"/>
+									<xsd:element name = "LOOPBACK" type = "xsd:string"/>
+									<xsd:element name = "GOS-PROFILE" type = "xsd:string"/>
+									<xsd:element name = "LOOPBACK-ENABLE" type = "xsd:string"/>
+									<xsd:element name = "IMPEDANCE" type = "xsd:string"/>
+									<xsd:element name = "OPERATIONAL-STATE" type = "xsd:string"/>
+									<xsd:element name = "ADDITIONAL-STATE" type = "xsd:string"/>
+									<xsd:element name = "ACTUAL-PWR-STATUS" type = "xsd:string"/>
+								</xsd:sequence>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name = "ETHERNET-PORT-STAT">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name = "GE-PORT-1">
+								<xsd:sequence>
+									<xsd:element name = "PROVISIONED-STATE" type = "xsd:string"/>
+									<xsd:element name = "SUBSCRIBER-ID" type = "xsd:string"/>
+									<xsd:element name = "DESCRIPTION" type = "xsd:string"/>
+									<xsd:element name = "PROVISIONED-RATE" type = "xsd:string"/>
+									<xsd:element name = "PROVISIONED-DUPLEX" type = "xsd:string"/>
+									<xsd:element name = "DISABLE-ON-BATT" type = "xsd:string"/>
+									<xsd:element name = "ACTUAL-STATE" type = "xsd:string"/>
+									<xsd:element name = "OPERATIONAL-STATE" type = "xsd:string"/>
+									<xsd:element name = "ADDITIONAL-STATE" type = "xsd:string"/>
+									<xsd:element name = "ACTUAL-RATE" type = "xsd:string"/>
+									<xsd:element name = "ACTUAL-DUPLEX" type = "xsd:string"/>
+									<xsd:element name = "ACTUAL-PWR-STATUS" type = "xsd:string"/>
+								</xsd:sequence>
+							</xsd:element>
+							<xsd:element name = "GE-PORT-2">
+								<xsd:sequence>
+									<xsd:element name = "PROVISIONED-STATE" type = "xsd:string"/>
+									<xsd:element name = "SUBSCRIBER-ID" type = "xsd:string"/>
+									<xsd:element name = "DESCRIPTION" type = "xsd:string"/>
+									<xsd:element name = "PROVISIONED-RATE" type = "xsd:string"/>
+									<xsd:element name = "PROVISIONED-DUPLEX" type = "xsd:string"/>
+									<xsd:element name = "DISABLE-ON-BATT" type = "xsd:string"/>
+									<xsd:element name = "ACTUAL-STATE" type = "xsd:string"/>
+									<xsd:element name = "OPERATIONAL-STATE" type = "xsd:string"/>
+									<xsd:element name = "ADDITIONAL-STATE" type = "xsd:string"/>
+									<xsd:element name = "ACTUAL-RATE" type = "xsd:string"/>
+									<xsd:element name = "ACTUAL-DUPLEX" type = "xsd:string"/>
+									<xsd:element name = "ACTUAL-PWR-STATUS" type = "xsd:string"/>
+								</xsd:sequence>
+							</xsd:element>
+							<xsd:element name = "GE-PORT-3">
+								<xsd:sequence>
+									<xsd:element name = "PROVISIONED-STATE" type = "xsd:string"/>
+									<xsd:element name = "SUBSCRIBER-ID" type = "xsd:string"/>
+									<xsd:element name = "DESCRIPTION" type = "xsd:string"/>
+									<xsd:element name = "PROVISIONED-RATE" type = "xsd:string"/>
+									<xsd:element name = "PROVISIONED-DUPLEX" type = "xsd:string"/>
+									<xsd:element name = "DISABLE-ON-BATT" type = "xsd:string"/>
+									<xsd:element name = "ACTUAL-STATE" type = "xsd:string"/>
+									<xsd:element name = "OPERATIONAL-STATE" type = "xsd:string"/>
+									<xsd:element name = "ADDITIONAL-STATE" type = "xsd:string"/>
+									<xsd:element name = "ACTUAL-RATE" type = "xsd:string"/>
+									<xsd:element name = "ACTUAL-DUPLEX" type = "xsd:string"/>
+									<xsd:element name = "ACTUAL-PWR-STATUS" type = "xsd:string"/>
+								</xsd:sequence>
+							</xsd:element>
+							<xsd:element name = "GE-PORT-4">
+								<xsd:sequence>
+									<xsd:element name = "PROVISIONED-STATE" type = "xsd:string"/>
+									<xsd:element name = "SUBSCRIBER-ID" type = "xsd:string"/>
+									<xsd:element name = "DESCRIPTION" type = "xsd:string"/>
+									<xsd:element name = "PROVISIONED-RATE" type = "xsd:string"/>
+									<xsd:element name = "PROVISIONED-DUPLEX" type = "xsd:string"/>
+									<xsd:element name = "DISABLE-ON-BATT" type = "xsd:string"/>
+									<xsd:element name = "ACTUAL-STATE" type = "xsd:string"/>
+									<xsd:element name = "OPERATIONAL-STATE" type = "xsd:string"/>
+									<xsd:element name = "ADDITIONAL-STATE" type = "xsd:string"/>
+									<xsd:element name = "ACTUAL-RATE" type = "xsd:string"/>
+									<xsd:element name = "ACTUAL-DUPLEX" type = "xsd:string"/>
+									<xsd:element name = "ACTUAL-PWR-STATUS" type = "xsd:string"/>
+								</xsd:sequence>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name = "ETHERNET-PORT-SERVICES">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name = "GE-PORT-1">
+								<xsd:sequence>
+									<xsd:element name = "SERVICE-1">
+										<xsd:sequence>
+											<xsd:element name = "TYPE" type = "xsd:string"/>
+											<xsd:element name = "NAME" type = "xsd:string"/>
+											<xsd:element name = "PROVISIONED-STATE" type = "xsd:string"/>
+											<xsd:element name = "SVC-TAG-ACTION" type = "xsd:string"/>
+											<xsd:element name = "BW-PROF" type = "xsd:string"/>
+											<xsd:element name = "VLAN" type = "xsd:string"/>
+											<xsd:element name = "CUST-VLAN" type = "xsd:string"/>
+										</xsd:sequence>
+									</xsd:element>
+									<xsd:element name = "SERVICE-2">
+										<xsd:sequence>
+											<xsd:element name = "TYPE" type = "xsd:string"/>
+											<xsd:element name = "NAME" type = "xsd:string"/>
+											<xsd:element name = "PROVISIONED-STATE" type = "xsd:string"/>
+											<xsd:element name = "SVC-TAG-ACTION" type = "xsd:string"/>
+											<xsd:element name = "BW-PROF" type = "xsd:string"/>
+											<xsd:element name = "VLAN" type = "xsd:string"/>
+											<xsd:element name = "CUST-VLAN" type = "xsd:string"/>
+										</xsd:sequence>
+									</xsd:element>
+								</xsd:sequence>
+							</xsd:element>
+							<xsd:element name = "GE-PORT-2">
+								<xsd:sequence>
+									<xsd:element name = "SERVICE-1">
+										<xsd:sequence>
+											<xsd:element name = "TYPE" type = "xsd:string"/>
+											<xsd:element name = "NAME" type = "xsd:string"/>
+											<xsd:element name = "PROVISIONED-STATE" type = "xsd:string"/>
+											<xsd:element name = "SVC-TAG-ACTION" type = "xsd:string"/>
+											<xsd:element name = "BW-PROF" type = "xsd:string"/>
+											<xsd:element name = "VLAN" type = "xsd:string"/>
+											<xsd:element name = "CUST-VLAN" type = "xsd:string"/>
+										</xsd:sequence>
+									</xsd:element>
+									<xsd:element name = "SERVICE-2">
+										<xsd:sequence>
+											<xsd:element name = "TYPE" type = "xsd:string"/>
+											<xsd:element name = "NAME" type = "xsd:string"/>
+											<xsd:element name = "PROVISIONED-STATE" type = "xsd:string"/>
+											<xsd:element name = "SVC-TAG-ACTION" type = "xsd:string"/>
+											<xsd:element name = "BW-PROF" type = "xsd:string"/>
+											<xsd:element name = "VLAN" type = "xsd:string"/>
+											<xsd:element name = "CUST-VLAN" type = "xsd:string"/>
+										</xsd:sequence>
+									</xsd:element>
+								</xsd:sequence>
+							</xsd:element>
+							<xsd:element name = "GE-PORT-3">
+								<xsd:sequence>
+									<xsd:element name = "SERVICE-1">
+										<xsd:sequence>
+											<xsd:element name = "TYPE" type = "xsd:string"/>
+											<xsd:element name = "NAME" type = "xsd:string"/>
+											<xsd:element name = "PROVISIONED-STATE" type = "xsd:string"/>
+											<xsd:element name = "SVC-TAG-ACTION" type = "xsd:string"/>
+											<xsd:element name = "BW-PROF" type = "xsd:string"/>
+											<xsd:element name = "VLAN" type = "xsd:string"/>
+											<xsd:element name = "CUST-VLAN" type = "xsd:string"/>
+										</xsd:sequence>
+									</xsd:element>
+									<xsd:element name = "SERVICE-2">
+										<xsd:sequence>
+											<xsd:element name = "TYPE" type = "xsd:string"/>
+											<xsd:element name = "NAME" type = "xsd:string"/>
+											<xsd:element name = "PROVISIONED-STATE" type = "xsd:string"/>
+											<xsd:element name = "SVC-TAG-ACTION" type = "xsd:string"/>
+											<xsd:element name = "BW-PROF" type = "xsd:string"/>
+											<xsd:element name = "VLAN" type = "xsd:string"/>
+											<xsd:element name = "CUST-VLAN" type = "xsd:string"/>
+										</xsd:sequence>
+									</xsd:element>
+								</xsd:sequence>
+							</xsd:element>
+							<xsd:element name = "GE-PORT-4">
+								<xsd:sequence>
+									<xsd:element name = "SERVICE-1">
+										<xsd:sequence>
+											<xsd:element name = "TYPE" type = "xsd:string"/>
+											<xsd:element name = "NAME" type = "xsd:string"/>
+											<xsd:element name = "PROVISIONED-STATE" type = "xsd:string"/>
+											<xsd:element name = "SVC-TAG-ACTION" type = "xsd:string"/>
+											<xsd:element name = "BW-PROF" type = "xsd:string"/>
+											<xsd:element name = "VLAN" type = "xsd:string"/>
+											<xsd:element name = "CUST-VLAN" type = "xsd:string"/>
+										</xsd:sequence>
+									</xsd:element>
+									<xsd:element name = "SERVICE-2">
+										<xsd:sequence>
+											<xsd:element name = "TYPE" type = "xsd:string"/>
+											<xsd:element name = "NAME" type = "xsd:string"/>
+											<xsd:element name = "PROVISIONED-STATE" type = "xsd:string"/>
+											<xsd:element name = "SVC-TAG-ACTION" type = "xsd:string"/>
+											<xsd:element name = "BW-PROF" type = "xsd:string"/>
+											<xsd:element name = "VLAN" type = "xsd:string"/>
+											<xsd:element name = "CUST-VLAN" type = "xsd:string"/>
+										</xsd:sequence>
+									</xsd:element>
+								</xsd:sequence>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name = "RFVIDEO-PORT-STAT">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name = "RF-PORT-1">
+								<xsd:sequence>
+									<xsd:element name = "PROVISIONED-STATE" type = "xsd:string"/>
+									<xsd:element name = "SUBSCRIBER-ID" type = "xsd:string"/>
+									<xsd:element name = "DESCRIPTION" type = "xsd:string"/>
+									<xsd:element name = "DISABLE-ON-BATT" type = "xsd:string"/>
+									<xsd:element name = "OPERATIONAL-STATE" type = "xsd:string"/>
+									<xsd:element name = "ADDITIONAL-STATE" type = "xsd:string"/>
+									<xsd:element name = "ACTUAL-PWR-STATUS" type = "xsd:string"/>
+								</xsd:sequence>
+							</xsd:element>
+							<xsd:element name = "RF-PORT-2">
+								<xsd:sequence>
+									<xsd:element name = "PROVISIONED-STATE" type = "xsd:string"/>
+									<xsd:element name = "SUBSCRIBER-ID" type = "xsd:string"/>
+									<xsd:element name = "DESCRIPTION" type = "xsd:string"/>
+									<xsd:element name = "DISABLE-ON-BATT" type = "xsd:string"/>
+									<xsd:element name = "OPERATIONAL-STATE" type = "xsd:string"/>
+									<xsd:element name = "ADDITIONAL-STATE" type = "xsd:string"/>
+									<xsd:element name = "ACTUAL-PWR-STATUS" type = "xsd:string"/>
+								</xsd:sequence>
+							</xsd:element>
+							<xsd:element name = "RF-PORT-3">
+								<xsd:sequence>
+									<xsd:element name = "PROVISIONED-STATE" type = "xsd:string"/>
+									<xsd:element name = "SUBSCRIBER-ID" type = "xsd:string"/>
+									<xsd:element name = "DESCRIPTION" type = "xsd:string"/>
+									<xsd:element name = "DISABLE-ON-BATT" type = "xsd:string"/>
+									<xsd:element name = "OPERATIONAL-STATE" type = "xsd:string"/>
+									<xsd:element name = "ADDITIONAL-STATE" type = "xsd:string"/>
+									<xsd:element name = "ACTUAL-PWR-STATUS" type = "xsd:string"/>
+								</xsd:sequence>
+							</xsd:element>
+							<xsd:element name = "RF-PORT-4">
+								<xsd:sequence>
+									<xsd:element name = "PROVISIONED-STATE" type = "xsd:string"/>
+									<xsd:element name = "SUBSCRIBER-ID" type = "xsd:string"/>
+									<xsd:element name = "DESCRIPTION" type = "xsd:string"/>
+									<xsd:element name = "DISABLE-ON-BATT" type = "xsd:string"/>
+									<xsd:element name = "OPERATIONAL-STATE" type = "xsd:string"/>
+									<xsd:element name = "ADDITIONAL-STATE" type = "xsd:string"/>
+									<xsd:element name = "ACTUAL-PWR-STATUS" type = "xsd:string"/>
+								</xsd:sequence>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name = "AVO-PORT-STAT">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name = "PROVISIONED-STATE" type = "xsd:string"/>
+							<xsd:element name = "PROVISIONED-RF-RETURN-STATE" type = "xsd:string"/>
+							<xsd:element name = "OPERATIONAL-STATE" type = "xsd:string"/>
+							<xsd:element name = "ADDITIONAL-STATE" type = "xsd:string"/>
+							<xsd:element name = "RF-RETURN-STATUS" type = "xsd:string"/>
+							<xsd:element name = "OPTICAL-RX-PWR" type = "xsd:string"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name = "HOTRF-PORT-STAT">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name = "PROVISIONED-STATE" type = "xsd:string"/>
+							<xsd:element name = "SUBSCRIBER-ID" type = "xsd:string"/>
+							<xsd:element name = "DESCRIPTION" type = "xsd:string"/>
+							<xsd:element name = "DISABLE-ON-BATT" type = "xsd:string"/>
+							<xsd:element name = "OPERATIONAL-STATE" type = "xsd:string"/>
+							<xsd:element name = "ADDITIONAL-STATE" type = "xsd:string"/>
+							<xsd:element name = "ACTUAL-PWR-STATUS" type = "xsd:string"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name = "ONT-ALARM">
+					<xsd:complexType>
+							<xsd:sequence maxOccurs="10">
+								<xsd:element name = "ALARM" type = "xsd:string"/>
+							</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name = "TRANSNUM" type = "xsd:string"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

@@ -1,0 +1,275 @@
+<h1 class="page-title">Combined Orders - <span class="fw-semi-bold">Create an Order</span></h1>
+<div class="row">
+    <div class="col-md-12 col-lg-8">{{ Object.keys(coc.schoolTestingWindow).length }}
+        <div ng-if="!coc.hasTestingWindows && coc.selectedSchool">
+        	<h3 class="text-danger">This school has no testing windows</h3>
+			<p><a class="btn btn-inverse" go-back>Go Back</a></p>
+        </div>
+
+
+        <section class="widget">
+			<form class="form-horizontal" name="combinedorderCreateForm" id="combinedorder-create-form" role="form" method="post" novalidate="novalidate" ng-submit="coc.placeOrder()">
+			    <fieldset>
+			        <legend>Order Information</legend>
+			        <div class="form-group">
+			            <label for="normal-field" class="col-sm-3 control-label"></label>
+			            <div class="col-sm-7">
+			                <div class="checkbox checkbox-success">
+	                           	<input type="checkbox" ng-model="coc.order.expedited" name="expedited" class="form-control" ng-true-value="1" ng-false-value="0" ng-change="(!coc.order.expedited ? coc.order.ship_level = 'Ground' : '')">
+	                            <label for="checkbox3">
+	                                Expedited?
+	                            </label>
+	                        </div>
+			            </div>
+			        </div>
+			        <div class="form-group">
+			            <label for="normal-field" class="col-sm-3 control-label">Customer</label>
+			            <div class="col-sm-7">
+			                 <select ng-model="coc.customer" name="customer" class="form-control" required="required" ng-change="coc.reportingTypes = coc.populateSummaryReportingPeriods(coc.customer)" ng-options="type.id as type.name for type in coc.customers">
+			                 	<option value="">SELECT AN INSTANCE</option>
+			                 </select>
+			            </div>
+			        </div>
+			        <div class="form-group" ng-if="coc.customer">
+			            <label for="normal-field" class="col-sm-3 control-label">Reporting Period</label>
+			            <div class="col-sm-7">
+			                 <select ng-model="coc.reporting_type" name="reporting_type" class="form-control" required="required" ng-change="coc.order.school_id ? coc.getSchoolFormData() : ''" ng-options="type.display_name as type.display_name + ' (' + type.tw_start_date + ' - ' + type.tw_end_date + ')' for type in coc.reportingTypes">
+			                 	<option value="">SELECT A REPORTING PERIOD</option>
+			                 </select>
+			            </div>
+			        </div>
+			        <div class="form-group" ng-show="coc.reporting_type">
+			            <label for="normal-field" class="col-sm-3 control-label">School ID</label>
+			            <div class="col-sm-7">
+			                 <input type="text" ng-model="coc.order.school_id" name="school_id" class="form-control" required="required">
+			            </div>
+			            <div class="col-sm-2">
+			                  <button type="button" class="btn btn-secondary" ng-click="coc.getSchoolFormData(coc.reportingTypes, coc.reporting_type, coc.order.school_id, coc.getDataBySchoolId);">Lookup</button>
+			            </div>
+			        </div>
+
+			        <div ng-hide="(coc.selectedSchool === null || !coc.order.school_id || !coc.reporting_type) && !(!coc.hasTestingWindows && coc.selectedSchool)">
+				        <div class="form-group">
+				            <label for="normal-field" class="col-sm-3 control-label">School Name</label>
+				            <div class="col-sm-7">
+				                 <input type="text" ng-model="coc.order.school_name" name="school_name" class="form-control" required="required">
+				            </div>
+				        </div>
+				        <div class="form-group">
+				            <label for="normal-field" class="col-sm-3 control-label">District ID</label>
+				            <div class="col-sm-7">
+				                 <input type="text" ng-model="coc.order.district_id" name="district_id" class="form-control" required="required">
+				            </div>
+				        </div>
+				        <div class="form-group">
+				            <label for="normal-field" class="col-sm-3 control-label">District Name</label>
+				            <div class="col-sm-7">
+				                 <input type="text" ng-model="coc.order.district_name" name="district_name" class="form-control" required="required">
+				            </div>
+				        </div>
+				        <div class="form-group">
+				            <label for="normal-field" class="col-sm-3 control-label">School Testing Window</label>
+				            <div class="col-sm-7">
+				                 <select ng-model="coc.order.school_testing_window" name="school_testing_window" class="form-control" required="" ng-options="name as value for (name , value) in coc.schoolTestingWindow" ng-change="coc.updateTestingWindows(coc.order.school_testing_window)">
+			                 		<option value="">SELECT A SCHOOL TESTING WINDOW</option>
+			                 	</select>
+				            </div>
+				        </div>
+				        <div class="form-group" ng-hide="coc.order.school_testing_window == null">
+				            <label for="normal-field" class="col-sm-3 control-label">Testing Start Date</label>
+				            <div class="col-sm-7">
+				                 <input type="text" ng-model="coc.order.testing_start_date" id="testing_start_date" class="form-control date" required="required">
+				            </div>
+				        </div>
+				        <div class="form-group" ng-hide="coc.order.school_testing_window == null">
+				            <label for="normal-field" class="col-sm-3 control-label">Testing End Date</label>
+				            <div class="col-sm-7">
+				                 <input type="text" ng-model="coc.order.testing_end_date" id="testing_end_date" class="form-control date" data-parsley-maxdate="{{ coc.testing_end_date_max | date:'MM/dd/yyyy' }}">
+				            </div>
+				        </div>
+				        <div class="form-group">
+				            <label for="normal-field" class="col-sm-3 control-label">Contact First Name</label>
+				            <div class="col-sm-7">
+				                 <input type="text" ng-model="coc.order.contact_first_name" name="contact_first_name" class="form-control" required="required">
+				            </div>
+				        </div>
+				        <div class="form-group">
+				            <label for="normal-field" class="col-sm-3 control-label">Contact Last Name</label>
+				            <div class="col-sm-7">
+				                 <input type="text" ng-model="coc.order.contact_last_name" name="contact_last_name" class="form-control" required="required">
+				            </div>
+				        </div>
+				   	</div>
+			    </fieldset>
+
+			    <fieldset ng-hide="coc.selectedSchool === null || !coc.order.school_id || !coc.reporting_type">
+			        <legend>Shipping Information</legend>
+			        <div class="form-group">
+			            <label for="normal-field" class="col-sm-3 control-label">Ship To</label>
+			            <div class="col-sm-7">
+			                 <input type="text" ng-model="coc.order.ship_to" name="ship_to" class="form-control" required="required">
+			            </div>
+			        </div>
+			        <div class="form-group">
+			            <label for="normal-field" class="col-sm-3 control-label">Ship Level</label>
+			            <div class="col-sm-7">
+			                 <select ng-disabled="!coc.order.expedited" ng-model="coc.order.ship_level" name="ship_level" class="form-control" required="required" ng-options="value for value in coc.shippingLevels">
+			                 </select>
+			            </div>
+			        </div>
+			        <div class="form-group">
+			            <label for="normal-field" class="col-sm-3 control-label">Address</label>
+			            <div class="col-sm-7">
+			                 <input type="text" ng-model="coc.order.ship_address" name="ship_address" class="form-control" required="required">
+			            </div>
+			        </div>
+			        <div class="form-group">
+			            <label for="normal-field" class="col-sm-3 control-label">Address Line 2</label>
+			            <div class="col-sm-7">
+			                 <input type="text" ng-model="coc.order.ship_address_2" name="ship_address_2" class="form-control">
+			            </div>
+			        </div>
+			        <div class="form-group">
+			            <label for="normal-field" class="col-sm-3 control-label">Address Line 3</label>
+			            <div class="col-sm-7">
+			                 <input type="text" ng-model="coc.order.ship_address_3" name="ship_address_3" class="form-control">
+			            </div>
+			        </div>
+			        <div class="form-group">
+			            <label for="normal-field" class="col-sm-3 control-label">City</label>
+			            <div class="col-sm-7">
+			                 <input type="text" ng-model="coc.order.ship_city" name="ship_city" class="form-control" required="required">
+			            </div>
+			        </div>
+			        <div class="form-group">
+			            <label for="normal-field" class="col-sm-3 control-label">State</label>
+			            <div class="col-sm-7">
+			                 <input type="text" ng-model="coc.order.ship_state" name="ship_state" class="form-control" required="required" maxlength="2">
+			            </div>
+			        </div>
+			        <div class="form-group">
+			            <label for="normal-field" class="col-sm-3 control-label">Zip</label>
+			            <div class="col-sm-7">
+			                 <input type="text" ng-model="coc.order.ship_zip" name="ship_zip" class="form-control" required="required">
+			            </div>
+			        </div>
+			        <div class="form-group">
+			            <label for="normal-field" class="col-sm-3 control-label">Country</label>
+			            <div class="col-sm-7">
+			                 <input type="text" ng-model="coc.order.ship_country" name="ship_country" class="form-control" required="required">
+			            </div>
+			        </div>
+			        <div class="form-group">
+			            <label for="normal-field" class="col-sm-3 control-label">Phone</label>
+			            <div class="col-sm-7">
+			                 <input type="text" ng-model="coc.order.ship_phone" name="ship_phone" class="form-control phone" required="required">
+			            </div>
+			        </div>
+			        <div class="form-group">
+			            <label for="normal-field" class="col-sm-3 control-label">Email</label>
+			            <div class="col-sm-7">
+			                 <input type="text" ng-model="coc.order.ship_email" name="ship_email" class="form-control" required="required" data-parsley-type="email">
+			            </div>
+			        </div>
+			    </fieldset>
+
+			    <div ng-show="(coc.selectedSchool === null || !coc.order.school_id || !coc.reporting_type || !coc.courses.length) && coc.reporting_type && (coc.selectedSchool !== null && coc.order.school_id)">
+			    	<h3 class="text-danger">There are no courses in the selected Report Type range</h3>
+			    </div>
+
+			    <fieldset ng-hide="coc.selectedSchool === null || !coc.order.school_id || !coc.reporting_type || !coc.courses.length">
+			        <legend>Accommodated Materials</legend>
+				    <p class="help-block">Accommodated Materials Orders auto-generate non-slugged Print Orders.</p>
+				    <table class="table table-striped table-bordered table-hover">
+						<thead>
+							<tr>
+								<th>Course</th>
+								<th>Accommodation Type</th>
+								<th>Quantity</th>
+								<th class="text-center">Remove</th>
+							</tr>
+						</thead>
+						<tbody>
+						    <tr ng-repeat="item in coc.accommodated">
+						        <td>
+						        	 <!--
+						        	 <select  ng-model="item.battery_code" name="battery_code" class="form-control" required="required" ng-options="battery.code as battery.description + ' (' + battery.code + ') - ' + battery.customer_type for battery in coc.batteries | filter:coc.filterCourses"></select>-->
+
+						        	 <select  ng-model="item.battery_code" name="battery_code" class="form-control" required="required" ng-options="battery.battery_code as battery.content_area + ' ' + battery.battery_mode + ' Form ' + battery.form_number + ' Grade ' + battery.grade + ' (' + battery.battery_code + ') - ' + battery.distribution for battery in coc.courses"></select>
+						        </td>
+						        <td>
+						        	 <select  ng-model="item.type" name="type" class="form-control" required="required" ng-options="name as value for (name , value) in coc.accommodationTypes"></select>
+						        </td>
+						        <td><input type="text" ng-model="item.quantity" class="form-control" required="required" data-parsley-type="integer"></td>
+						        <td class="text-center"><a class="btn btn-danger" ng-click="coc.removeAccommodated($index)"><i class="fa fa-trash"></a></td>
+						    </tr>
+						</tbody>
+					</table>
+			        <div class="row">
+			            <div class="col-sm-offset-4 col-sm-7">
+				        	<button type="button" class="btn btn-success pull-right btn-add-accommodated" ng-click="coc.addAccommodated()">Add another Accommodation</button>
+			            </div>
+			        </div>
+				</fieldset>
+
+			    <fieldset ng-hide="coc.selectedSchool === null || !coc.order.school_id || !coc.reporting_type || !coc.courses.length">
+			        <legend>Print Orders</legend>
+				    <table class="table table-striped table-bordered table-hover">
+						<thead>
+							<tr>
+								<th>Course</th>
+								<th>Quantity</th>
+								<th class="text-center">Remove</th>
+							</tr>
+						</thead>
+						<tbody>
+						    <tr ng-repeat="item in coc.print">
+						        <td>
+						        	 <select  ng-model="item.battery_code" name="battery_code" class="form-control" required="required" ng-options="battery.battery_code as battery.content_area + ' ' + battery.battery_mode + ' Form ' + battery.form_number + ' Grade ' + battery.grade + ' (' + battery.battery_code + ') - ' + battery.distribution for battery in coc.courses"></select>
+						        </td>
+						        <td><input type="text" ng-model="item.quantity" class="form-control" required="required" data-parsley-type="integer"></td>
+						        <td class="text-center"><a class="btn btn-danger" ng-click="coc.removePrint($index)"><i class="fa fa-trash"></a></td>
+						    </tr>
+						</tbody>
+					</table>
+			        <div class="row">
+			            <div class="col-sm-offset-4 col-sm-7">
+				        	<button type="button" class="btn btn-success pull-right" ng-click="coc.addPrint()">Add another Print Order</button>
+			            </div>
+			        </div>
+				</fieldset>
+
+			    <div class="form-actions" ng-hide="coc.selectedSchool === null || !coc.order.school_id || !coc.reporting_type || !coc.courses.length">
+			        <div class="row">
+			            <div class="col-sm-offset-4 col-sm-7">
+			                <button type="submit" class="btn btn-primary">Submit</button>
+			                <button type="button" class="btn btn-inverse">Cancel</button>
+			            </div>
+			        </div>
+			    </div>
+			</form>
+		</section>
+	</div>
+</div>
+
+<script>
+window.ParsleyValidator
+    .addValidator('mindate', function (value, requirement) {
+        var timestamp = Date.parse(value),
+            minTs = Date.parse(requirement);
+        return isNaN(timestamp) ? false : timestamp >= minTs;
+    }, 32)
+    .addMessage('en', 'mindate', 'This date should be greater than %s')
+    .addValidator('maxdate', function (value, requirement) {
+        var timestamp = Date.parse(formatDate(new Date(value))),
+            minTs = Date.parse(formatDate(new Date(requirement)));
+            console.log(timestamp);
+            console.log(minTs);
+        return isNaN(timestamp) ? false : timestamp <= minTs;
+    }, 32)
+    .addMessage('en', 'maxdate', 'This date should be less than %s');
+function formatDate(d) {
+    d.setTime( d.getTime() + d.getTimezoneOffset()*60*1000);
+    return d;
+}
+</script>
